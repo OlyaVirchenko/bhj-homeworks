@@ -18,5 +18,6 @@ cookie.onclick = function() {
   }
 
   let time2 = new Date();
-  time_counter.textContent = -(time1 - time2) / counter;
+  //1 / (time1 - time2) / 1000;
+  time_counter.textContent = counter / (time2.getSeconds() - time1.getSeconds());
 };
