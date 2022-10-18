@@ -17,7 +17,14 @@ class Game {
   }
 
   registerEvents() {
-    /*
+    document.addEventListener('keyup', e => {
+     if (e.key.toUpperCase() === this.currentSymbol.textContent.toUpperCase()) {
+        this.success()
+      } else {
+        this.fail()
+      }
+   });   
+      /*
       TODO:
       Написать обработчик события, который откликается
       на каждый введённый символ.

@@ -1,6 +1,6 @@
 const sliderItem = Array.from(document.querySelectorAll('.slider__item'));
-const prev = document.getElementsByClassName('slider__arrow_prev');
-const next = document.getElementsByClassName('slider__arrow_next');
+const prev = document.querySelector('.slider__arrow_prev');
+const next = document.querySelector('.slider__arrow_next');
 let index = 0;
  
 next.onclick = (() => {
@@ -13,8 +13,8 @@ prev.onclick = (() => {
 });
 
 function slider(index) {
-	for (item of index) {
+	
 		sliderItem.forEach(item => item.classList.remove('slider__item_active'));
 		sliderItem[index].classList.add('slider__item_active');
-	}
+	
 }
