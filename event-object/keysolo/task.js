@@ -4,6 +4,7 @@ class Game {
     this.wordElement = container.querySelector('.word');
     this.winsElement = container.querySelector('.status__wins');
     this.lossElement = container.querySelector('.status__loss');
+    this.timeElement = container.querySelector('.status__time');
 
     this.reset();
 
@@ -58,6 +59,20 @@ class Game {
   setNewWord() {
     const word = this.getWord();
 
+    let wordLength = Number(word.length);
+    let timerId;
+    this.timeElement.textContent = wordLength;
+
+    function timer() {
+      wordLength -= 1;
+      if (wordLength < 0) {
+        fail()
+      } else {
+        timerId = setTimeout(countdown, 1000);
+      }
+    }
+
+
     this.renderWord(word);
   }
 
@@ -94,4 +109,10 @@ class Game {
 }
 
 new Game(document.getElementById('game'))
+
+
+
+
+
+
 
