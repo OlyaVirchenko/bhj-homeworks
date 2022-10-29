@@ -7,7 +7,7 @@ class Game {
     this.timeElement = container.querySelector('.status__time');
 
     this.reset();
-
+    
     this.registerEvents();
   }
 
@@ -42,35 +42,53 @@ class Game {
     }
 
     if (++this.winsElement.textContent === 10) {
-      alert('Победа!');
-      this.reset();
+      setTimeout(() => {     
+        alert('Победа!');
+        this.reset();
+      }, 200)
     }
+
+    this.clearCounter()
     this.setNewWord();
   }
 
+
   fail() {
     if (++this.lossElement.textContent === 5) {
-      alert('Вы проиграли!');
-      this.reset();
-    }
+    setTimeout(() => {   
+        alert('Вы проиграли!');
+        this.reset();
+      }, 200)
+  }
     this.setNewWord();
   }
+
 
   setNewWord() {
     const word = this.getWord();
 
     let wordLength = Number(word.length);
-    let timerId;
+    
     this.timeElement.textContent = wordLength;
 
-    function timer() {
-      wordLength -= 1;
-      if (wordLength < 0) {
-        fail()
-      } else {
-        timerId = setTimeout(countdown, 1000);
-      }
-    }
+    //this.timeElement.textContent = this.timeElement.textContent = `${wordLength} секунд`
+    this.timeInterval = setInterval(() => {
+        if (--wordLength === 1) {
+          this.timeElement.textContent = wordLength
+        } else {
+          this.timeElement.textContent = wordLength
+        }
+    } , 1000);
+
+    let time = Number(`${word.length}000`);
+
+   this.timeout = setTimeout( (() => {
+      //console.log(time,this.timeout);
+      this.fail()
+    }),time)
+    
+
+
 
 
     this.renderWord(word);
@@ -106,6 +124,13 @@ class Game {
 
     this.currentSymbol = this.wordElement.querySelector('.symbol_current');
   }
+
+  clearCounter(){
+    this.timeElement.textContent = 0;
+    clearInterval(this.timeInterval)
+    clearTimeout(this.timeout)
+  }
+
 }
 
 new Game(document.getElementById('game'))
