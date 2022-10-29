@@ -71,7 +71,7 @@ class Game {
     
     this.timeElement.textContent = wordLength;
 
-    //this.timeElement.textContent = this.timeElement.textContent = `${wordLength} секунд`
+    
     this.timeInterval = setInterval(() => {
         if (--wordLength === 1) {
           this.timeElement.textContent = wordLength
@@ -83,7 +83,6 @@ class Game {
     let time = Number(`${word.length}000`);
 
    this.timeout = setTimeout( (() => {
-      //console.log(time,this.timeout);
       this.fail()
     }),time)
     
