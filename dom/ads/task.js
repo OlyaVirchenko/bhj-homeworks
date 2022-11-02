@@ -1,15 +1,24 @@
 const rotatorCase = Array.from(document.querySelectorAll('.rotator__case'));
-let counter = 0;
-setInterval(rotator, 1000)
+let time;
+let timerId;
+let index = 0;
 
-function rotator() {	
-	for (let i = 0; i < rotatorCase.length; i += 1) {
-		if (i === 0) {
-			rotatorCase[rotatorCase.length - 1].classList.remove('rotator__case_active');
-			rotatorCase[0].classList.add('rotator__case_active');
-		} else if (i != 0) {
-		    rotatorCase[i - 1].classList.remove('rotator__case_active');
-     	    rotatorCase[i].classList.add('rotator__case_active');
-	    }
-    }
-};
+rotator()
+
+function rotator() {		 
+	if (index === 0) {
+        rotatorCase[rotatorCase.length - 1].classList.remove('rotator__case_active');
+	    rotatorCase[0].classList.add('rotator__case_active');
+	    rotatorCase[index].style.color = rotatorCase[index].dataset.color;
+
+	} else if (index != 0) {		    		
+	    rotatorCase[index - 1].classList.remove('rotator__case_active');
+     	rotatorCase[index].classList.add('rotator__case_active');
+     	rotatorCase[index].style.color = rotatorCase[index].dataset.color;
+	}
+
+    time = rotatorCase[index].dataset.speed;
+    index === rotatorCase.length - 1 ? (index = 0) : (index += 1);
+    
+    timerId = setTimeout(rotator, time);
+}; 
