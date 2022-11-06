@@ -64,13 +64,22 @@ class Game {
     
     this.timeElement.textContent = wordLength;
 
-    
-    this.timeInterval = setInterval(() => {
-        if (--wordLength === 0) {
+    /*if (--wordLength === 0) {
           this.timeElement.textContent = wordLength
         } else {
           this.timeElement.textContent = wordLength
-        }
+        }*/
+
+    this.timeInterval = setInterval(() => {
+       wordLength -= 1;
+       if (wordLength === 0) {
+        this.timeElement.textContent = wordLength
+      } else if(wordLength < 0) {
+        wordLength = 0;
+      } else {
+        this.timeElement.textContent = wordLength
+      }
+      //clearInterval(this.timeInterval)
     } , 1000);
 
     let time = Number(`${word.length}000`);
