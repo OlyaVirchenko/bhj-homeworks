@@ -68,6 +68,20 @@ class Autocomplete {
   }
 
   getMatches( text ) {
+
+    let words = [];
+
+    text = text.toUpperCase();
+
+    let arrWordsList =  Array.from(this.input).map(item => item.text);
+
+    for (let i = 0; i < this.input.length; i += 1) {
+      if (arrWirdsList[i].slice(0, text.length).includes(text)) {
+        arrWords.push({ text: arrWordsList[i], value: i + 1 });
+      }
+
+      return words;
+    }
     /*
       TODO: этот метод нужно дописать
       text - фраза, которую вводят в поле поиска
