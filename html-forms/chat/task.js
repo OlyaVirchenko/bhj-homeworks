@@ -8,6 +8,13 @@ chatWidget.onclick = function() {
 	chatWidget.classList.add('chat-widget_active');
 }
 
+chatInput.addEventListener('focus', () => {
+    interval = noMessages();
+})
+
+chatInput.addEventListener('blur', () => {
+  clearInterval(interval);
+})
 
 chatInput.addEventListener('keydown', el => {
 	if (el.key === 'Enter' && chatInput.value !== '') {
@@ -21,6 +28,8 @@ chatInput.addEventListener('keydown', el => {
             </div>
           </div>
         `;
+
+    chatInput.value = '';
      
        timerId = setTimeout(() => {
 		message.innerHTML += `
@@ -33,8 +42,25 @@ chatInput.addEventListener('keydown', el => {
             </div>
           </div>
         `;
+        scroll();
     }, 1000) 
    }    
+  scroll();
+  
+  /*if (chatInput.value = '') {
+      let intervalId = setInterval(() => {
+    message.innerHTML += `
+          <div class="message">
+            <div class="message__time">
+              ${time}
+            </div>
+            <div class="message__text">
+              Чего не пишешь?
+            </div>
+          </div>
+        `;
+        scroll();
+      }, 10000)} */
 
 }); 
 
@@ -63,6 +89,27 @@ function messageTime() {
 	return `${hours}:${minutes}`
 }
 
+function scroll() {
+  const message = document.querySelectorAll('.message');
+  message[message.length - 1].scrollIntoView(false);
+}
+
+function noMessages() {  
+  let intervalId = setInterval(() => {
+    message.innerHTML += `
+          <div class="message">
+            <div class="message__time">
+              ${time}
+            </div>
+            <div class="message__text">
+              Чего не пишешь?
+            </div>
+          </div>
+        `;
+        scroll();
+      }, 10000)
+  return intervalId;  
+}
 
 
 
