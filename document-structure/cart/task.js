@@ -1,15 +1,22 @@
+
 const productQuantity = Array.from(document.querySelectorAll('.product__quantity'));
 const cartProducts = document.querySelector('.cart__products')
-
-
-
+//const quantityValue = element.currentTarget.querySelector('.product__quantity-value');
+const addBasket = Array.from(document.querySelectorAll('.product__add'));
 
 for (let el of productQuantity) {
 	el.addEventListener('click', e => {
 		counter(e);
-		addProduct(e)
+        addProduct(e);
 	})
 }
+
+for (let el of addBasket) {
+   el.addEventListener('click', e => {
+        addProduct(e);
+    }) 
+}
+
 
 function counter(element) {
 	const btnDelete = element.currentTarget.querySelector('.product__quantity-control_dec');
@@ -24,26 +31,48 @@ function counter(element) {
     	quantityValue.innerText = Number(quantityValue.innerText) + 1;
     }
 
-   /* if (/*элемунт есть в корзине && element.target === btnAdd) {
-        quantityValue.innerText = Number(quantityValue.innerText) + 1;
-    } else if (/*элемунт есть в корзине && element.target === btnDelete) {
-    	Number(quantityValue.innerText) < 1 ? (quantityValue.innerText = 1) : quantityValue.innerText;
+    /* if (cartProducts.dataset.products === 'true' && element.target === productAdd) {
+        const cartProduct = Array.from(document.querySelectorAll('.cart__product'));
+        for (let elem of cartProduct) {
+            if (elem.dataset.id === element.currentTarget.closest('.product').dataset.id) {
+                elem.querySelector('.cart__product-count').innerText =
+                Number(elem.querySelector('.cart__product-count').innerText) +
+                Number(quantityValue.innerText);
+            }
+        }
     }*/
 }
 
 function addProduct(element) {
-	const btnToBasket = element.currentTarget.querySelector('.product__add');
-    const img = element.currentTarget.getAttribute("src");
+    const cartProduct = document.createElement('div');
+    const product = element.currentTarget.closest('.product');
+    const srcImage = product.querySelector('img').src;
+    const img = document.createElement('img');
+    const counter = document.createElement('div');
+    //const quantity = element.querySelector('.product__quantity-value');
 
-    if (element.target === btnToBasket) {
+    cartProducts.appendChild(cartProduct);
+    cartProduct.classList.add('cart__product');
+    cartProduct.dataset.id = product.dataset.id;
+    cartProduct.appendChild(img);
+    img.classList.add('cart__product-image');
+    img.src = srcImage;
 
-    	let productInBasket = document.createElement('div');
-    	productInBasket.innerHTML = `<div class="cart__product" data-id = "">
-                <img class="cart__product-image" src= "">
-                <div class="cart__product-count"> 2 </div>
-            </div>`
+    counter.classList.add('cart__product-count');
+    cartProduct.appendChild(counter);
 
-        cartProducts.insertAdjacentElement('afterBegin', productInBasket);
-    }
-
+    counter.innerHTML = element.currentTarget.querySelector('.product__quantity-value').innerHTML;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

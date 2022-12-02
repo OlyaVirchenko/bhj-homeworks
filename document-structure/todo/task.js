@@ -1,13 +1,23 @@
 const taskInput = document.querySelector('#task__input');
-const taskList = document.querySelector('.tasks__list');
-const removeBtn = document.querySelector('.task__remove');
+const taskList = document.querySelector('#tasks__list');
+const button = document.querySelector('#tasks__add');
+
+taskList.addEventListener('click', (e) => {
+  removeTask(e.target);
+});
+
+button.addEventListener('click', (e) => {
+  enterTask(taskInput);
+  e.preventDefault();
+});
 
 taskInput.addEventListener('keydown', elem => {
 	elem.preventDefault();
 	if(elem.key === 'Enter') {
 		enterTask(taskInput);
-	}
-	 elem.preventDefault();
+	} else {
+		return;
+	}	 
 });
 
 function enterTask(el) {
@@ -31,12 +41,12 @@ function enterTask(el) {
 
 
 function removeTask(e) {
-	removeBtn.addEventListener('click', el => {
-	el.remove();
-  })	
+  if (e === e.parentNode.querySelector('.task__remove')) {
+    e.parentNode.remove();
+  }
 }
 	
-removeTask(taskList)
+
 
 
 
