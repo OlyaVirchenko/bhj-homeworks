@@ -1,20 +1,14 @@
 const chatWidget = document.querySelector('.chat-widget');
 const chatInput = document.getElementById('chat-widget__input');
 const message = document.querySelector('.chat-widget__messages');
-const time = messageTime()
-
+const time = messageTime();
+let intervalId;
+let timerId;
 
 chatWidget.onclick = function() {
 	chatWidget.classList.add('chat-widget_active');
 }
 
-chatInput.addEventListener('focus', () => {
-    interval = noMessages();
-})
-
-chatInput.addEventListener('blur', () => {
-  clearInterval(interval);
-})
 
 chatInput.addEventListener('keydown', el => {
 	if (el.key === 'Enter' && chatInput.value !== '') {
@@ -31,7 +25,8 @@ chatInput.addEventListener('keydown', el => {
 
     chatInput.value = '';
      
-       timerId = setTimeout(() => {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => {
 		message.innerHTML += `
           <div class="message">
             <div class="message__time">
@@ -47,9 +42,11 @@ chatInput.addEventListener('keydown', el => {
    }    
   scroll();
   
-  /*if (chatInput.value = '') {
-      let intervalId = setInterval(() => {
-    message.innerHTML += `
+  
+  if (chatInput.value == '') {
+    clearTimeout(intervalId);
+      intervalId = setTimeout(() => {
+        message.innerHTML += `
           <div class="message">
             <div class="message__time">
               ${time}
@@ -57,12 +54,14 @@ chatInput.addEventListener('keydown', el => {
             <div class="message__text">
               Чего не пишешь?
             </div>
-          </div>
-        `;
-        scroll();
-      }, 10000)} */
+          </div>`;
+  scroll();
+      }, 10000)
 
+   } 
 }); 
+
+//clearTimeout(timerId)
 
 
  function messageBot() {
@@ -93,24 +92,6 @@ function scroll() {
   const message = document.querySelectorAll('.message');
   message[message.length - 1].scrollIntoView(false);
 }
-
-function noMessages() {  
-  let intervalId = setInterval(() => {
-    message.innerHTML += `
-          <div class="message">
-            <div class="message__time">
-              ${time}
-            </div>
-            <div class="message__text">
-              Чего не пишешь?
-            </div>
-          </div>
-        `;
-        scroll();
-      }, 10000)
-  return intervalId;  
-}
-
 
 
 

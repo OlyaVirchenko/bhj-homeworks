@@ -102,6 +102,6 @@ class Autocomplete {
 
     */
   }
-}
+
 
 new Autocomplete( document.querySelector( '.autocomplete' ));
