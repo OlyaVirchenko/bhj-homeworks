@@ -7,7 +7,7 @@ const addBasket = Array.from(document.querySelectorAll('.product__add'));
 for (let el of productQuantity) {
 	el.addEventListener('click', e => {
 		counter(e);
-        addProduct(e);
+        //addProduct(e);
 	})
 }
 
@@ -61,7 +61,7 @@ function addProduct(element) {
     counter.classList.add('cart__product-count');
     cartProduct.appendChild(counter);
 
-    counter.innerHTML = element.currentTarget.querySelector('.product__quantity-value').innerHTML;
+    counter.innerHTML = element.closest('.product__quantity-value').innerHTML;
 }
 
 
