@@ -12,7 +12,7 @@ button.addEventListener('click', (e) => {
 });
 
 taskInput.addEventListener('keydown', elem => {
-	elem.preventDefault();
+	//elem.preventDefault();
 	if(elem.key === 'Enter') {
 		enterTask(taskInput);
 	} else {

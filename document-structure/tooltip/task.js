@@ -1,5 +1,16 @@
 const tooltip = Array.from(document.querySelectorAll('.has-tooltip'));
 
+window.addEventListener('scroll', () => {
+  if (document.querySelector('.tooltip_active') != null) {
+    coordinatTooltip(document.querySelector('.tooltip_active'));
+  }
+});
+
+window.addEventListener('resize', () => {
+  if (document.querySelector('.tooltip_active') != null) {
+    coordinatTooltip(document.querySelector('.tooltip_active'));
+  }
+});
 
 tooltip.forEach((elem) => {
   elem.addEventListener('click', (e) => {
@@ -36,12 +47,6 @@ function addTooltip(element) {
 
 	tooltipText.classList.add('tooltip_active');
 }
-
-window.addEventListener('scroll', () => {
-  if (document.querySelector('.tooltip_active') != null) {
-    coordinatTooltip(document.querySelector('.tooltip_active'));
-  }
-});
 
 
 
