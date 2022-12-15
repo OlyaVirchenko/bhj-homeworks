@@ -1,5 +1,5 @@
 const loader = document.querySelector('.loader');
-const requestURL = 'https://netology-slow-rest.herokuapp.com/upload.php';
+const requestURL = 'https://students.netoservices.ru/nestjs-backend/slow-get-courses';
 
 
 load(addElement);
@@ -28,27 +28,26 @@ function load(callback) {
 
 
 function addElement(...args) {
-	const items = document.querySelector('#items');
+  const items = document.querySelector('#items');
+  const divItem = document.createElement('div');
+  const divItemCode = document.createElement('div');
+  const divItemValue = document.createElement('div');
+  const divItemCurency = document.createElement('div');
 
-	let divItem = document.createElement('div');
-	let itemCode = document.createElement('div');
-	let itemValue = document.createElement('div');
-	let itemCurrency = document.createElement('div');
+  divItem.classList.add('item');
+  divItemCode.classList.add('item__code');
+  divItemValue.classList.add('item__value');
+  divItemCurency.classList.add('item__currency');
 
-	divItem.classList.add('item');
-	itemCode.classList.add('item__code');
-	itemValue.classList.add('item__value');
-	itemCurrency.classList.add('item__currency');
+  divItemCode.innerText = args[0];
+  divItemValue.innerText = args[1];
+  divItemCurency.innerText = 'руб.';
 
-	itemCode.innerText = args[0];
-    itemValue.innerText = args[1];
-    itemCurency.innerText = 'руб.';
+  items.appendChild(divItem);
+  divItem.appendChild(divItemCode);
+  divItem.appendChild(divItemValue);
+  divItem.appendChild(divItemCurency);
 
-    items.appendChild(divItem);
-    divItem.appendChild(itemCode);
-    divItem.appendChild(itemValue);
-    divItem.appendChild(itemCurency);
-
-    loader.classList.remove('loader_active');
+   loader.classList.remove('loader_active');
 }
 

@@ -1,4 +1,4 @@
-const requestURL = 'https://netology-slow-rest.herokuapp.com/poll.php';
+const requestURL = 'https://students.netoservices.ru/nestjs-backend/poll';
 
 
 loaderGet(addElement);
