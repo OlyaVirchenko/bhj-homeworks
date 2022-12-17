@@ -1,6 +1,8 @@
 const textArea = document.querySelector('#editor');
 const button = document.querySelector('#button');
 
+enterText('text', textArea);
+
 function saveText (key, value) {
 	localStorage.setItem(key, value);
 }
@@ -15,4 +17,7 @@ button.addEventListener('click', el => {
 	saveText('text', textArea.value);
 });
 
+function enterText(keyname, element) {
+  let cash = localStorage.getItem(keyname);
+}
 

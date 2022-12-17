@@ -5,8 +5,10 @@ const signin = document.querySelector('#signin');
 const user = document.querySelector('#user_id');
 let requestURL = 'https://students.netoservices.ru/nestjs-backend/auth';
 
+autoEnterUser();
 
-signButton.addEventListener('click', el => {
+form.addEventListener('click', el => {
+    e.preventDefault();
     upload(form, requestURL, requestHandler())
     form.reset();
     e.preventDefault();
@@ -15,11 +17,12 @@ signButton.addEventListener('click', el => {
 
 function upload(data, url, callback){
     const xhr = new XMLHttpRequest;
-    const formData = new FormData;
-    xhr.open(data, url);
+    const formData = new FormData(data);
+    xhr.open('POST', url, true);
+    xhr.send(formData);
+
     xhr.responseType = 'json';
     xhr.onload = () => callback(xhr.response);
-    xhr.send(formData);
 }
 
 function requestHandler(response) {
@@ -44,3 +47,5 @@ function autoEnterUser() {
         user.innerText = localStorage.getItem('userActiveId');
     }
 }
+
+
