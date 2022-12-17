@@ -2,30 +2,24 @@ const loader = document.querySelector('.loader');
 const requestURL = 'https://students.netoservices.ru/nestjs-backend/slow-get-courses';
 
 
-load(addElement);
+load(requestURL, addElement);
 
+function load(url, callback) {
+  const xhr = new XMLHttpRequest();
 
-function load(callback) {
-	const xhr = new XMLHttpRequest();
-	xhr.open('GET', requestURL)
+  xhr.open('GET', url, true);
 
-	xhr.onload = () => {
-		callback(JSON.parse(xhr.response))
-	}
+  xhr.responseType = '';
 
-	xhr.responseType = 'json';
-
-	xhr.onload = () => {
-		if (xhr.status != 200) {
-			alert(`Ошибка ${xhr.status}: ${xhr.statusText}`); 
-		} else {
-        	return callback(xhr.response);
-		}
-	}
-	xhr.send();
+  xhr.send();
+  xhr.onload = function () {
+    if (xhr.status != 200) {
+      alert(`Ошибка ${xhr.status}: ${xhr.statusText}`);
+    } else {
+      return callback(JSON.parse(xhr.response));
+    }
+  };
 }
-
-
 
 function addElement(...args) {
   const items = document.querySelector('#items');
@@ -50,4 +44,5 @@ function addElement(...args) {
 
    loader.classList.remove('loader_active');
 }
+
 
