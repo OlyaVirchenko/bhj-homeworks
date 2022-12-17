@@ -46,6 +46,7 @@ function addTooltip(element) {
 	element.currentTarget.insertAdjacentElement('afterEnd', tooltipText);
 
 	tooltipText.classList.add('tooltip_active');
+  coordinatTooltip(document.querySelector('.tooltip_active'));
 }
 
 
@@ -62,61 +63,47 @@ function coordinatTooltip(toolTipElement) {
   let widthtoolTipElement = toolTipElement.getBoundingClientRect().width;
   let heighttoolTipElement = toolTipElement.getBoundingClientRect().height;
 
-  if (toolTipElement.dataset.position === 'top') {
-    if (coordinatY <= heighttoolTipElement) {
-      toolTipElement.style.left = coordinatX + 'px';
-      toolTipElement.style.top = coordinatY + coordinatHeight + 'px';
-    } else {
-      toolTipElement.style.left = coordinatX + 'px';
-      toolTipElement.style.top = coordinatY - heighttoolTipElement + 'px';
-    }
-  } else if (toolTipElement.dataset.position === 'bottom') {
-    if (windowHeight - coordinatY <= heighttoolTipElement) {
-      toolTipElement.style.left = coordinatX + 'px';
-      toolTipElement.style.top = coordinatY - heighttoolTipElement + 'px';
-    } else {
-      toolTipElement.style.left = coordinatX + 'px';
-      toolTipElement.style.top = coordinatHeight + coordinatY + 'px';
-    }
-  } else if (toolTipElement.dataset.position === 'right') {
-    if (windowWidt - coordinatRight <= widthtoolTipElement) {
-      toolTipElement.style.left = coordinatX + 'px';
-      toolTipElement.style.top = coordinatY + coordinatHeight + 'px';
-    } else {
-      toolTipElement.style.left = coordinatX + coordinatWIdth + 'px';
-      toolTipElement.style.top = coordinatY + 'px';
-    }
-  } else if (toolTipElement.dataset.position === 'left') {
-    if (coordinatX < widthtoolTipElement) {
-      toolTipElement.style.left = coordinatX + 'px';
-      toolTipElement.style.top = coordinatY + coordinatHeight + 'px';
-    } else {
-      toolTipElement.style.left = coordinatX - widthtoolTipElement + 'px';
-      toolTipElement.style.top = coordinatY + 'px';
-    }
+
+
+  switch (toolTipElement.dataset.position) {
+
+    case ('top'):
+      if (coordinatY <= heighttoolTipElement) {
+        toolTipElement.style.left = coordinatX + 'px';
+        toolTipElement.style.top = coordinatY + coordinatHeight + 'px';
+      } else {
+        toolTipElement.style.left = coordinatX + 'px';
+        toolTipElement.style.top = coordinatY - heighttoolTipElement + 'px';
+      };
+      break;
+
+    case ('bottom'):
+      if (windowHeight - coordinatY <= heighttoolTipElement) {
+        toolTipElement.style.left = coordinatX + 'px';
+        toolTipElement.style.top = coordinatY - heighttoolTipElement + 'px';
+      } else {
+        toolTipElement.style.left = coordinatX + 'px';
+        toolTipElement.style.top = coordinatHeight + coordinatY + 'px';
+      };
+      break;
+
+    case ('right'):
+      if (windowWidt - coordinatRight <= widthtoolTipElement) {
+        toolTipElement.style.left = coordinatX + 'px';
+        toolTipElement.style.top = coordinatY + coordinatHeight + 'px';
+      } else {
+        toolTipElement.style.left = coordinatX + coordinatWIdth + 'px';
+        toolTipElement.style.top = coordinatY + 'px';
+      }
+      break;
+
+    case ('left'): 
+      if (coordinatX <= widthtoolTipElement) {
+        toolTipElement.style.left = coordinatX + 'px';
+        toolTipElement.style.top = coordinatY + coordinatHeight + 'px';
+      } else {
+        toolTipElement.style.left = coordinatX - widthtoolTipElement + 'px';
+        toolTipElement.style.top = coordinatY + 'px';
+      }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
